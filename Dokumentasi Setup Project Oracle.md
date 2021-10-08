@@ -49,7 +49,7 @@
 
 - `sudo chown -R ubuntu:ubuntu /etc/apache2/sites-enabled/`
 
-## Menginstall PHP 7
+## Mengkonfigurasi dan Menginstall PHP 7
 
 1.  Install PHP 7 menggunakan perintah berikut.
 
@@ -57,11 +57,35 @@
 
 2.  Verifikasi Instalasi dan Restart Apache.
 
-        `php -v`
+    `php -v`
 
-        `sudo systemctl restart apache2`
+    `sudo systemctl restart apache2`
 
-    </details>
+3.  Install PHP Curl
+
+    `sudo apt-get install php7.4-culr`
+
+4.  Install Mbstringphp
+
+    `sudo apt-get install php-mbstring`
+
+5.  Install Dom PHP
+
+    `sudo apt install php7.4-xml`
+
+6.  Install Driver Mysql
+
+    `sudo apt-get install php7.4-mysql`
+
+    Setelah menginstall driver, aktifkan extensinya pada file `php.ini` **extension=pdo_mysql**.
+
+7.  Restart Apache
+
+    `sudo systemctl restart apache2`
+
+    `sudo chown www-data:www-data -R *`
+
+      </details>
 
 # 2. Menginstall Composer Pada Ubuntu
 
@@ -69,7 +93,7 @@
 
 Jalankan perintah berikut pada terminal
 
-      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"`
+      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
       php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
