@@ -8,6 +8,7 @@
 # 1. Set up Apache dan PHP
 
 <details>
+
 ## Menginstall Apache2
 
 1. Lakukan koneksi ke instance menggunakan SSH.
@@ -65,6 +66,7 @@
 # 2. Menginstall Composer Pada Ubuntu
 
 <details>
+
 Jalankan perintah berikut pada terminal
 
       php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"`
@@ -80,6 +82,7 @@ Lakukan pengecekan pada terminal menggunakan perintah `composer`.
 # 3. Melakukan Setup MySQL
 
 <details>
+
 1. Install MySQL
 
 `sudo apt install mysql-client-core-8.0`
@@ -112,6 +115,7 @@ Lakukan pengecekan pada terminal menggunakan perintah `composer`.
 # 4. Integrasi Project Laravel pada Oracle
 
 <details>
+
 1.  Clone Project pada direktori `var/www/` menggunakan `git clone nama_project`.
 
 2.  Masuk ke folder project yang telah di-clone, lalu ketikkan perintah `composer update`.
@@ -165,4 +169,5 @@ Lakukan pengecekan pada terminal menggunakan perintah `composer`.
     `sudo /etc/init.d/apache2/restart`
 
 7.  Cek pada browser menggunakan IP Public Instance.
+
 </details>
