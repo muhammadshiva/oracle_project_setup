@@ -63,7 +63,7 @@
 
 3.  Install PHP Curl
 
-    `sudo apt-get install php7.4-culr`
+    `sudo apt-get install php7.4-curl`
 
 4.  Install Mbstringphp
 
@@ -82,8 +82,6 @@
 7.  Restart Apache
 
     `sudo systemctl restart apache2`
-
-    `sudo chown www-data:www-data -R *`
 
       </details>
 
@@ -109,7 +107,7 @@ Lakukan pengecekan pada terminal menggunakan perintah `composer`.
 
 1. Install MySQL
 
-`sudo apt install mysql-client-core-8.0`
+   `sudo apt install mysql-client-core-8.0`
 
 2. Mengkoneksikan MySQL
 
@@ -193,5 +191,78 @@ Lakukan pengecekan pada terminal menggunakan perintah `composer`.
     `sudo /etc/init.d/apache2/restart`
 
 7.  Cek pada browser menggunakan IP Public Instance.
+
+</details>
+
+# 5. Setup SSL
+
+<details>
+
+1.  Tambahkan port 443 pada VCN Oracle
+
+2.  Buat _https key_ (ssl) menggunakan perintah berikut.
+
+    `sudo openssl req -x509 -days 365 -newkey rsa:2048 -keyout /home/key/apache.key -out /home/key/apache.crt`
+
+3.  Tekan Enter
+
+    Mengisikan detail dari https sebagai berikut :
+
+    Country name : ID
+
+    State : Jawa Timur
+
+    Organization name : Polinema
+
+    Organization unit name : Information Technology
+
+    Common Name / Server FQDN : localhost
+
+    Email : localhost@localhost.com
+
+4.  Lakukan konfigurasi pada file **default-ssl.conf** yang terletak pada direktori **/etc/apache2/sites-avaialbe/**.
+
+    Listen 443
+
+    <Virtualhost \*:443>
+
+         ServerName localhost
+
+         DocumentRoot /var/www/spp-sekolah/public
+
+         SSLEngine on
+
+         SSLCertificateFile "/home/key/localhost.crt"
+
+         SSLCertificateKeyFile "/home/key/localhost.
+         key"
+
+         <Directory /var/www/spp-sekolah/public>
+
+                 AllowOverride all
+
+         </Directory>
+
+     </Virtualhost>
+
+5.  Menambahkan IP Tables untuk https, dengan menggunakan perintah berikut :
+
+    `sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT`
+
+6.  Mengaktifkan site dari **default-ssl** yang telah dikonfigurasi sebelumnya menggunakan perintah berikut :
+
+    `sudo a2ensite`
+
+7.  Mengaktifkan ssl menggunakan perintah berikut :
+
+    `sudo a2enmod ssl`
+
+8.  Lakukan restart pada apache2
+
+    `sudo systemctl restart apache2`
+
+9.  Akses menggunakan **https://alamat_web**, apabila berhasil maka akan muncul **https** pada alamat web yang dijalankan.
+
+    ![](img/ssl.PNG)
 
 </details>
